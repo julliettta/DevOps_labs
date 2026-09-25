@@ -24,7 +24,7 @@
 ```bash
    docker run --name lab0-postgres -e POSTGRES_PASSWORD=pass -e POSTGRES_DB=lab0 -p 5432:5432 -d postgres
 ```
-
+![Docker](images/docker.png)
 
 2. Установить зависимости:
 ```bash
