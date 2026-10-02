@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Lab1 — nginx</title>
+</head>
+<body>
+  <h1>Заметки (через nginx)</h1>
+  <input id="text" placeholder="новая заметка">
+  <button onclick="addNote()">Добавить</button>
+  <p>Ответил инстанс: <b id="instance">?</b></p>
+  <ul id="list"></ul>
+
+  <script>
+    async function loadNotes() {
+      const res = await fetch("/api/notes");
+      const data = await res.json();
+      document.getElementById("instance").innerText = data.instance;
+      document.getElementById("list").innerHTML =
+        data.notes.map(n => `<li>${n.text}</li>`).join("");
+    }
+    async function addNote() {
+      const text = document.getElementById("text").value;
+      if (!text) return;
+      await fetch("/api/notes", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text})
+      });
+      document.getElementById("text").value = "";
+      loadNotes();
+    }
+    loadNotes();
+  </script>
+</body>
+</html>
