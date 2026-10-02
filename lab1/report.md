@@ -102,14 +102,14 @@ curl -I http://lab1.local
 ```
 Получили `301` и ссылку на https-версию — ровно то, что нужно.
 
-![8](screenshots/10.png)
+![8](screenshots/10.jpg)
 
 ### Балансировка между двумя бэкендами
 
 Сделали несколько запросов подряд на `/api/notes` и увидели, как в ответе 
 чередуются `backend-1` и `backend-2`. 
 
-![9](screenshots/11.png)
+![9](screenshots/11.jpg)
 
 ### Главный момент — убиваем один бэкенд
 
@@ -120,9 +120,9 @@ curl -I http://lab1.local
 действительно пережил "падение" половины бэкенда, и пользователь этого 
 даже не заметил бы.
 
-![10](screenshots/12.png)
+![10](screenshots/12.jpg)
 
-![11](screenshots/13.png)
+![11](screenshots/13.jpg)
 
 ### /admin закрыт паролем
 
@@ -132,7 +132,7 @@ curl -k -I -u admin:admin123 https://lab1.local/admin/   # 200 с паролем
 ```
 Сработало сразу, без сюрпризов.
 
-![12](screenshots/14.png)
+![12](screenshots/14.jpg)
 
 ### Лимит запросов — тут было интереснее всего
 
@@ -151,7 +151,7 @@ curl -k -I -u admin:admin123 https://lab1.local/admin/   # 200 с паролем
 простой пункт в задании, а на деле заняло больше всего времени и 
 экспериментов.
 
-![13](screenshots/15.png)
+![13](screenshots/15.jpg)
 
 ### Виртуальные хосты
 
@@ -162,9 +162,9 @@ curl -k https://site2.local/
 Два домена — два разных сайта, как и требовалось. Приятно было увидеть, 
 что nginx действительно смотрит на заголовок Host и решает, что отдавать.
 
-![14](screenshots/16.png)
+![14](screenshots/16.jpg)
 
-![15](screenshots/17.png)
+![15](screenshots/17.jpg)
 
 ### Своя страница 404
 
@@ -173,7 +173,7 @@ curl -k https://lab1.local/no-such-page
 ```
 Вместо стандартной nginx-заглушки — наша собственная страница. 
 
-![16](screenshots/18.png)
+![16](screenshots/18.jpg)
 
 ### Alias для /docs
 
@@ -182,7 +182,7 @@ curl -k https://lab1.local/docs/
 ```
 Отдаёт содержимое отдельной папки `docs/`, как и задумано.
 
-![17](screenshots/19.png)
+![17](screenshots/19.jpg)
 
 ## Что в итоге
 
