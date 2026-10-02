@@ -39,8 +39,7 @@ Files/Git/CN=lab1.local`. Решилось легко — поставили д�
 (`//CN=...`), и всё заработало. Мелочь, но минут 20 на это ушло, было 
 немного обидно спотыкаться на ровном месте.
 
-📸 *Скрин: создание сертификата, видно два файла — .crt и .key*
-`screenshots/01-cert-created.png`
+![](screenshots/3.png)
 
 ### Пароль для /admin
 
@@ -48,16 +47,15 @@ Files/Git/CN=lab1.local`. Решилось легко — поставили д�
 Docker-образ httpd, не пришлось ничего ставить локально, это было 
 приятно.
 
-📸 *Скрин: содержимое .htpasswd файла*
-`screenshots/02-htpasswd.png`
+![](screenshots/4.png)
 
 ### Запускаем два бэкенда одновременно
 
 Открыли два терминала, в каждом запустили свою копию бэкенда с разным 
 портом и ID. 
 
-📸 *Скрин: два терминала с backend-1 и backend-2*
-`screenshots/03-two-backends-running.png`
+![](screenshots/1.png)
+![](screenshots/2.png)
 
 ### Прописываем домены
 
@@ -67,8 +65,7 @@ Docker-образ httpd, не пришлось ничего ставить ло�
 администратора — блокнот от обычного пользователя просто не давал 
 сохранить файл.
 
-📸 *Скрин: hosts-файл с добавленными строками*
-`screenshots/04-hosts-file.png`
+![](screenshots/7.png)
 
 ### Собираем главный конфиг nginx
 
@@ -89,11 +86,9 @@ Docker-образ httpd, не пришлось ничего ставить ло�
 контейнеру, как найти "хозяина". После этого всё заработало с первого 
 раза.
 
-📸 *Скрин: docker ps с запущенным lab1-nginx*
-`screenshots/05-nginx-running.png`
+![](screenshots/8.png)
 
-📸 *Скрин: открытый в браузере https://lab1.local*
-`screenshots/06-site-open-https.png`
+![](screenshots/9.png)
 
 ## Проверяем каждый пункт задания
 
@@ -107,14 +102,14 @@ curl -I http://lab1.local
 ```
 Получили `301` и ссылку на https-версию — ровно то, что нужно.
 
-📸 `screenshots/07-http-redirect.png`
+![](screenshots/10.png)
 
 ### Балансировка между двумя бэкендами
 
 Сделали несколько запросов подряд на `/api/notes` и увидели, как в ответе 
 чередуются `backend-1` и `backend-2`. 
 
-📸 `screenshots/08-load-balancing.png`
+![](screenshots/11.png)
 
 ### Главный момент — убиваем один бэкенд
 
@@ -125,7 +120,9 @@ curl -I http://lab1.local
 действительно пережил "падение" половины бэкенда, и пользователь этого 
 даже не заметил бы.
 
-📸 `screenshots/09-failover.png`
+![](screenshots/12.png)
+
+![](screenshots/13.png)
 
 ### /admin закрыт паролем
 
@@ -135,7 +132,7 @@ curl -k -I -u admin:admin123 https://lab1.local/admin/   # 200 с паролем
 ```
 Сработало сразу, без сюрпризов.
 
-📸 `screenshots/10-admin-auth.png`
+![](screenshots/14.png)
 
 ### Лимит запросов — тут было интереснее всего
 
@@ -154,7 +151,7 @@ curl -k -I -u admin:admin123 https://lab1.local/admin/   # 200 с паролем
 простой пункт в задании, а на деле заняло больше всего времени и 
 экспериментов.
 
-📸 `screenshots/11-rate-limit.png`
+![](screenshots/15.png)
 
 ### Виртуальные хосты
 
@@ -165,7 +162,9 @@ curl -k https://site2.local/
 Два домена — два разных сайта, как и требовалось. Приятно было увидеть, 
 что nginx действительно смотрит на заголовок Host и решает, что отдавать.
 
-📸 `screenshots/12-vhosts.png`
+![](screenshots/16.png)
+
+![](screenshots/17.png)
 
 ### Своя страница 404
 
@@ -174,7 +173,7 @@ curl -k https://lab1.local/no-such-page
 ```
 Вместо стандартной nginx-заглушки — наша собственная страница. 
 
-📸 `screenshots/13-custom-404.png`
+![](screenshots/18.png)
 
 ### Alias для /docs
 
@@ -183,7 +182,7 @@ curl -k https://lab1.local/docs/
 ```
 Отдаёт содержимое отдельной папки `docs/`, как и задумано.
 
-📸 `screenshots/14-docs-alias.png`
+![](screenshots/19.png)
 
 ## Что в итоге
 
