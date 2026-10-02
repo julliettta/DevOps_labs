@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Notes</title>
+</head>
+<body>
+  <h1>Заметки</h1>
+  <input id="text" placeholder="новая заметка">
+  <button onclick="addNote()">Добавить</button>
+  <ul id="list"></ul>
+
+  <script>
+    async function loadNotes() {
+      const res = await fetch("/notes");
+      const notes = await res.json();
+      document.getElementById("list").innerHTML =
+        notes.map(n => `<li>${n.text}</li>`).join("");
+    }
+    async function addNote() {
+      const text = document.getElementById("text").value;
+      if (!text) return;
+      await fetch("/notes", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text})
+      });
+      document.getElementById("text").value = "";
+      loadNotes();
+    }
+    loadNotes();
+  </script>
+</body>
+</html>
