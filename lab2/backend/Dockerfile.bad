@@ -1,0 +1,23 @@
+# ===== ПЛОХОЙ DOCKERFILE =====
+
+# BAD 1: плавающий тег и полный образ (~1 ГБ) с кучей лишнего.
+#        Завтра тег укажет на другую версию, сборка станет невоспроизводимой.
+FROM python:3.12
+
+WORKDIR /app
+
+# BAD 2: копируем ВСЁ до установки зависимостей.
+#        Любая правка кода сбрасывает кеш, и pip install идёт заново.
+COPY . .
+
+# BAD 3: pip без --no-cache-dir, кеш pip остаётся в образе
+RUN pip install -r requirements.txt
+
+# BAD 4: apt-get без очистки списков пакетов и ненужные утилиты в образе
+RUN apt-get update && apt-get install -y curl vim git
+
+EXPOSE 5000
+
+# BAD 5: запуск от root (пользователь по умолчанию)
+# BAD 6: dev-сервер Flask вместо gunicorn, и нет HEALTHCHECK
+CMD ["python", "app.py"]
